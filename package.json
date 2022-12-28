@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build":"build:prod"
+    "build":"node index.js"
   },
   "keywords": [],
   "author": "",
