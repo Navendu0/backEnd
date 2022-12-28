@@ -49,10 +49,11 @@ app.use('/api/v1',userRoute)
 app.use('/api/v1',categoryRoute)
 app.use('/api/v1',productRoute)
 
-app.use('/',(req,res)=>{
-  res.send("error")
-})
 
+
+app.get('/',(req,res)=>{
+  res.send("ok navendu")
+})
 
 
 module.exports = app;
