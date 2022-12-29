@@ -2,6 +2,8 @@ exports.isAuth= (req,res,next)=>{
     try {
        console.log("in is auth")
         if (req.isAuthenticated()) {
+                   console.log("in is auth if 2")
+
             return next()
           }
 
