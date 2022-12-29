@@ -1,6 +1,6 @@
 exports.isAuth= (req,res,next)=>{
     try {
-
+       console.log("in is auth")
         if (req.isAuthenticated()) {
             return next()
           }
