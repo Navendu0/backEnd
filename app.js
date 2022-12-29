@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://ms-maity.onrender.com" || "http://127.0.0.1:5173", // <-- location of the react app were connecting to
+    origin: "http://127.0.0.1:5173", // <-- location of the react app were connecting to
     credentials: true,
   })
 );
