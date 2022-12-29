@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://unique-salamander-e7129e.netlify.app", // <-- location of the react app were connecting to
+    origin: "https://ms-maity.onrender.com", // <-- location of the react app were connecting to
     credentials: true,
   })
 );
