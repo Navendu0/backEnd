@@ -31,6 +31,10 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+     cookie:{
+      SameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 60
+    }
   })
 );
 
