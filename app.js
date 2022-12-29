@@ -12,6 +12,9 @@ const userRoute = require('./Routes/user')
 const categoryRoute = require('./Routes/category')
 const productRoute = require('./Routes/product')
 
+app.set('trust proxy', 1);
+
+
 //----------------------------------------- END OF IMPORTS----------------------------------------
 
 // Middleware
