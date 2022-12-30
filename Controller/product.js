@@ -119,17 +119,11 @@ exports.deleteProduct = async (req, res) => {
             })
         }
 
-        const DIR = path.resolve("./")
-
-           product?.image.forEach(element => {
-            const   imagepath=DIR+'/uploads/'+element.data
-
-            if (fs.existsSync(imagepath)) {
-                fs.unlinkSync(imagepath);
-            } 
-
-
-           });
+       
+          product.images.forEach((item) => {
+            cloudinary.uploader.destroy(item.public_id);
+          });
+        
         product = await Product.deleteOne(product)
 
         categoryFind.quantity = categoryFind.quantity - 1
