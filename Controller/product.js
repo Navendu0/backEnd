@@ -1,6 +1,8 @@
 const Brand = require("../Models/Brand")
 const Category = require("../Models/Category")
 const Product = require("../Models/Product")
+const cloudinary = require("cloudinary")
+
 
 // const express = require("express")
 var fs = require('fs');
@@ -12,10 +14,11 @@ exports.uploadImage = async (req, res) => {
         if (req.files) {
             let data = [];
             for (var i = 0; i < req.files.length; i++) {
-                console.log(req.files)
-                data.push({
-                    data: req.files[i].filename,
-                });
+              const result = await cloudinary.uploader.upload(req.files[i].path);
+              data.push({
+                public_id: result.public_id,
+                url: result.secure_url,
+              });
             }
             res.send(data);
         }
@@ -31,7 +34,7 @@ exports.uploadImage = async (req, res) => {
 
 exports.addNewProduct = async (req, res) => {
     try {
-        const { name, price, image, highlightText, description, youtubeLinks, category, brandName
+        const { name, price, images, highlightText, description, youtubeLinks, category, brandName
         } = req.body
 
 
@@ -49,7 +52,7 @@ exports.addNewProduct = async (req, res) => {
         }
 
         let newProduct = await Product.create({
-            name, price, highlightText, description, youtubeLinks, category, brandName, image
+            name, price, highlightText, description, youtubeLinks, category, brandName, images
         })
 
         categoryFind.quantity = categoryFind.quantity + 1
@@ -95,6 +98,9 @@ exports.allProduct = async (req, res) => {
         })
     }
 }
+
+ 
+
 
 exports.deleteProduct = async (req, res) => {
 
@@ -148,4 +154,49 @@ exports.deleteProduct = async (req, res) => {
         })
     }
 
+}
+
+
+exports.productByCategory = async (req, res) => {
+    try {
+        const {category}=req.body
+        const products = await Product.find({category})
+
+        res.status(200).json({
+            user:req?.user,
+            success: true,
+            message: "successful",
+            products,
+            
+        })
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.productByBrand = async (req, res) => {
+    try {
+        const {brandName}=req.body
+        const products = await Product.find({brandName})
+
+        res.status(200).json({
+            user:req?.user,
+            success: true,
+            message: "successful",
+            products,
+            
+        })
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
 }
