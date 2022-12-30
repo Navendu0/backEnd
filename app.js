@@ -4,6 +4,7 @@ const cors = require("cors");
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
+const cloudinary = require("cloudinary");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
@@ -13,6 +14,12 @@ const categoryRoute = require('./Routes/category')
 const productRoute = require('./Routes/product')
 
 app.set('trust proxy', 1);
+
+cloudinary.config({
+  cloud_name: 'doxpyqcna',
+  api_key: '295844176564539',
+  api_secret: 'yXSGHZCilT6Zvf5-cDUXaBo9IfQ'
+});
 
 
 //----------------------------------------- END OF IMPORTS----------------------------------------
