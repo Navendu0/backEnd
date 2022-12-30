@@ -25,10 +25,16 @@ const products = mongoose.Schema({
     ],
     
 
-    image: [{
-        data: String,
-     //   contentType: String
-    }],
+      images:[{
+        public_id: {
+          type: String,
+        },
+    
+        url: {
+          type: String,
+          required: [true, "please add some photos"]
+        }
+      }],
 
     category: { type: String, require:true},
 
