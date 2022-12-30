@@ -1,5 +1,5 @@
 const express = require("express")
-const { addNewProduct, uploadImage, allProduct, deleteProduct } = require("../Controller/product")
+const { addNewProduct, uploadImage, allProduct, deleteProduct, productByCategory, productByBrand } = require("../Controller/product")
 var app = express()
 
 var fs = require('fs');
@@ -8,12 +8,12 @@ var multer = require('multer');
 const { isAuth } = require("../isauth");
 
 var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
+    // destination: (req, file, cb) => {
+    //     cb(null, 'uploads')
+    // },
     filename: (req, file, cb) => {
-        console.log(file)
-        cb(null, new Date().toISOString().replace(/:/g, '-')+'-'+file.originalname )
+      
+        cb(null, Date.now()+'-'+file.originalname )
     }
 });
   
@@ -25,6 +25,9 @@ const router = express.Router()
 router.route('/imageupload').post(isAuth,upload.array("image",10),uploadImage)
 router.route('/addProduct').post(isAuth,addNewProduct)
 router.route('/allproduct').get(allProduct)
+
+router.route('/productByCategory').get(productByCategory)
+router.route('/productByBrand').get(productByBrand)
 
 
 
