@@ -86,3 +86,31 @@ exports.deleteFeaturePhotos = async (req, res) => {
 
 
 }
+
+exports.getAllFeaturePhotos = async (req, res) => {
+    try {
+
+        const featurePhotos = await FeaturePhotos.findOne({})
+        if (featurePhotos) {
+            return res.status(200).json({
+                featurePhotos,
+                success: true,
+                message: "found"
+            })
+        }
+
+        if (!featurePhotos) {
+            return res.status(404).json({
+                featurePhotos,
+                success: false,
+                message: "not found"
+            })
+        }
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
