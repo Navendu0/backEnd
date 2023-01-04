@@ -57,8 +57,8 @@ exports.addFeaturePhotos = async (req, res) => {
 
 exports.deleteFeaturePhotos = async (req, res) => {
     try {
-        const { id } = req.body
-        const featurePhotos = await FeaturePhotos.findById({ _id: id })
+        const { public_id } = req.body
+        const featurePhotos = await FeaturePhotos.findById({})
         if (featurePhotos.length == 0) {
             return res.status(403).json({
                 success: false,
@@ -66,9 +66,7 @@ exports.deleteFeaturePhotos = async (req, res) => {
             })
         }
 
-        featurePhotos.photos.forEach((item) => {
-            cloudinary.uploader.destroy(item.public_id);
-        });
+        cloudinary.uploader.destroy(public_id);
 
         return res.status(200).json({
             success: true,
