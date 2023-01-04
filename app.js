@@ -12,6 +12,7 @@ const User = require("./Models/User");
 const userRoute = require('./Routes/user')
 const categoryRoute = require('./Routes/category')
 const productRoute = require('./Routes/product')
+const featureRoute=require('./Routes/featurePhotos')
 
 app.set('trust proxy', 1);
 
@@ -64,6 +65,8 @@ app.use('/api/v1',userRoute)
 
 app.use('/api/v1',categoryRoute)
 app.use('/api/v1',productRoute)
+app.use('/api/v1',featureRoute)
+
 
 
 
