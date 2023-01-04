@@ -21,8 +21,7 @@ const router = express.Router()
 
 router.route('/uploadfeaturephotos').post(isAuth,upload.array("photos",10),addFeaturePhotos)
 router.route('/deletefeaturephotos').post(isAuth,deleteFeaturePhotos)
-
-
+router.route('/allFeaturePhotos').get(getAllFeaturePhotos)
 
 
 module.exports = router
