@@ -1,5 +1,5 @@
 const express = require("express")
-const { addFeaturePhotos, deleteFeaturePhotos } = require("../Controller/featurePhotos")
+const { addFeaturePhotos, deleteFeaturePhotos,getAllFeaturePhotos } = require("../Controller/featurePhotos")
 const { isAuth } = require("../isauth")
 var multer = require('multer');
 
