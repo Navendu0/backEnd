@@ -14,7 +14,7 @@ const categoryRoute = require('./Routes/category')
 const productRoute = require('./Routes/product')
 const featureRoute=require('./Routes/featurePhotos')
 
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
 cloudinary.config({
   cloud_name: 'doxpyqcna',
@@ -39,12 +39,12 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
-     cookie:{
-    secure: true,
-    httpOnly: true,
-    sameSite: 'none',
-    maxAge: 60 * 60 * 24 * 1000
-    }
+//      cookie:{
+//     secure: true,
+//     httpOnly: true,
+//     sameSite: 'none',
+//     maxAge: 60 * 60 * 24 * 1000
+//     }
   })
 );
 
