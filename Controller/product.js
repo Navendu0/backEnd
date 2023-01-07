@@ -14,11 +14,11 @@ exports.uploadImage = async (req, res) => {
         if (req.files) {
             let data = [];
             for (var i = 0; i < req.files.length; i++) {
-              const result = await cloudinary.uploader.upload(req.files[i].path);
-              data.push({
-                public_id: result.public_id,
-                url: result.secure_url,
-              });
+                const result = await cloudinary.uploader.upload(req.files[i].path);
+                data.push({
+                    public_id: result.public_id,
+                    url: result.secure_url,
+                });
             }
             res.send(data);
         }
@@ -83,11 +83,11 @@ exports.allProduct = async (req, res) => {
         const products = await Product.find({})
 
         res.status(200).json({
-            user:req?.user,
+            user: req?.user,
             success: true,
             message: "successful",
             products,
-            
+
         })
 
 
@@ -99,7 +99,7 @@ exports.allProduct = async (req, res) => {
     }
 }
 
- 
+
 
 
 exports.deleteProduct = async (req, res) => {
@@ -119,11 +119,11 @@ exports.deleteProduct = async (req, res) => {
             })
         }
 
-       
-          product.images.forEach((item) => {
+
+        product.images.forEach((item) => {
             cloudinary.uploader.destroy(item.public_id);
-          });
-        
+        });
+
         product = await Product.deleteOne(product)
 
         categoryFind.quantity = categoryFind.quantity - 1
@@ -153,15 +153,15 @@ exports.deleteProduct = async (req, res) => {
 
 exports.productByCategory = async (req, res) => {
     try {
-        const {category}=req.body
-        const products = await Product.find({category})
+        const { category } = req.body
+        const products = await Product.find({ category })
 
         res.status(200).json({
-            user:req?.user,
+            user: req?.user,
             success: true,
             message: "successful",
             products,
-            
+
         })
 
 
@@ -175,16 +175,55 @@ exports.productByCategory = async (req, res) => {
 
 exports.productByBrand = async (req, res) => {
     try {
-        const {brandName}=req.body
-        const products = await Product.find({brandName})
+        const { brandName } = req.body
+        const products = await Product.find({ brandName })
 
         res.status(200).json({
-            user:req?.user,
+            user: req?.user,
             success: true,
             message: "successful",
             products,
-            
+
         })
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+
+exports.editProduct = async (req, res) => {
+    try {
+        const { id, name, price, images, highlightText, description, youtubeLinks, category, brandName } = req.body
+
+        let product = await Product.findById({ _id: id })
+
+
+        if (!product) {
+            return res.status(200).json({
+                success: false,
+                message: "product not found"
+            })
+        }
+
+
+        product = await Product.updateOne({ _id: id }, { name, price, images, highlightText, description, youtubeLinks, category, brandName }).then((result) => {
+            res.status(200).json({
+                success: false,
+                message: "product update success"
+            })
+        }).catch(err => {
+            res.status(203).json({
+                success: false,
+                message: "error while updating product"
+            })
+        })
+
+
 
 
     } catch (error) {

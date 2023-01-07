@@ -1,5 +1,5 @@
 const express = require("express")
-const { addNewProduct, uploadImage, allProduct, deleteProduct, productByCategory, productByBrand } = require("../Controller/product")
+const { addNewProduct, uploadImage, allProduct, deleteProduct, productByCategory, productByBrand, editProduct } = require("../Controller/product")
 var app = express()
 
 var fs = require('fs');
@@ -32,6 +32,7 @@ router.route('/productByBrand').get(productByBrand)
 
 
 router.route('/deleteproduct').post(isAuth,deleteProduct)
+router.route('/updateproduct').post(isAuth,editProduct)
 
 
 
