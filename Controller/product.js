@@ -37,8 +37,6 @@ exports.addNewProduct = async (req, res) => {
         const { name, price, images, highlightText, description, youtubeLinks, category, brandName
         } = req.body
 
-
-
         const categoryFind = await Category.findOne({ name: category })
 
         const brandFind = await Brand.findOne({ name: brandName })
@@ -154,10 +152,10 @@ exports.deleteProduct = async (req, res) => {
 exports.productByCategory = async (req, res) => {
     try {
         const { category } = req.body
-        const products = await Product.find({ category })
+        const products = await Product.find({ category:category })
+
 
         res.status(200).json({
-            user: req?.user,
             success: true,
             message: "successful",
             products,

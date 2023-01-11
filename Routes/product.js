@@ -26,9 +26,8 @@ router.route('/imageupload').post(isAuth,upload.array("image",10),uploadImage)
 router.route('/addProduct').post(isAuth,addNewProduct)
 router.route('/allproduct').get(allProduct)
 
-router.route('/productByCategory').get(productByCategory)
-router.route('/productByBrand').get(productByBrand)
-
+router.route('/productByCategory').post(productByCategory)
+router.route('/productByBrand').post(productByBrand)
 
 
 router.route('/deleteproduct').post(isAuth,deleteProduct)
