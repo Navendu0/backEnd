@@ -6,6 +6,19 @@ const category = mongoose.Schema({
         required: true,
         unique: true
     },
+
+    image:{
+        public_id: {
+            type: String,
+          },
+      
+          url: {
+            type: String,
+            required: [true, "please add some photos"]
+          }
+    },
+    
+    
     quantity: {
         type: Number,
         default: 0
